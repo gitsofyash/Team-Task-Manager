@@ -5,7 +5,7 @@ dotenv.config();
 
 const { Pool } = pg;
 
-const connectionString = process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL;
+const connectionString = process.env.DATABASE_PUBLIC_URL || process.env.DATABASE_URL;
 
 if (!connectionString) {
   throw new Error("DATABASE_URL or DATABASE_PUBLIC_URL is required. Set your PostgreSQL URL in Railway variables.");
