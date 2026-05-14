@@ -5,10 +5,10 @@ dotenv.config();
 
 const { Pool } = pg;
 
-const connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL;
 
 if (!connectionString) {
-  throw new Error("DATABASE_URL is required. Copy .env.example to .env and set your PostgreSQL URL.");
+  throw new Error("DATABASE_URL or DATABASE_PUBLIC_URL is required. Set your PostgreSQL URL in Railway variables.");
 }
 
 export const pool = new Pool({
