@@ -65,6 +65,16 @@ function clearSession() {
   renderAuthState();
 }
 
+function setAuthTab(tabName) {
+  document.querySelectorAll("[data-auth-tab]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.authTab === tabName);
+  });
+
+  document.querySelectorAll("[data-auth-panel]").forEach((panel) => {
+    panel.classList.toggle("active", panel.dataset.authPanel === tabName);
+  });
+}
+
 function renderAuthState() {
   const authed = Boolean(state.token && state.user);
   $("#authView").classList.toggle("hidden", authed);
@@ -257,6 +267,10 @@ $("#loginForm").addEventListener("submit", async (event) => {
 });
 
 $("#logoutButton").addEventListener("click", clearSession);
+
+document.querySelectorAll("[data-auth-tab]").forEach((button) => {
+  button.addEventListener("click", () => setAuthTab(button.dataset.authTab));
+});
 
 $("#projectForm").addEventListener("submit", async (event) => {
   event.preventDefault();

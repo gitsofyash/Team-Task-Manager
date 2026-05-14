@@ -27,7 +27,7 @@ dashboardRouter.get("/", async (req, res, next) => {
 
     const tasks = await query(
       `SELECT DISTINCT t.id, t.title, t.status, t.due_date, p.name AS project_name,
-        u.name AS assignee_name
+        u.name AS assignee_name, t.created_at
        FROM tasks t
        JOIN projects p ON p.id = t.project_id
        LEFT JOIN users u ON u.id = t.assignee_id
@@ -39,7 +39,7 @@ dashboardRouter.get("/", async (req, res, next) => {
     );
 
     const projects = await query(
-      `SELECT DISTINCT p.id, p.name,
+      `SELECT p.id, p.name,
         COUNT(t.id)::int AS total,
         COUNT(t.id) FILTER (WHERE t.status = 'done')::int AS done
        FROM projects p
