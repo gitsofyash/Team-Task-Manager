@@ -10,6 +10,8 @@ import { dashboardRouter } from "./routes/dashboard.js";
 import { projectsRouter } from "./routes/projects.js";
 import { tasksRouter } from "./routes/tasks.js";
 import { errorHandler, notFound } from "./middleware/errors.js";
+import { pool } from "./db.js";
+import { schemaSql } from "./schema.js";
 
 dotenv.config();
 
@@ -46,6 +48,16 @@ app.get("*", (req, res) => {
 
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Team Task Manager running on port ${port}`);
+async function start() {
+  await pool.query(schemaSql);
+
+  app.listen(port, () => {
+    console.log(`Team Task Manager running on port ${port}`);
+  });
+}
+
+start().catch((error) => {
+  console.error("Failed to start server.");
+  console.error(error);
+  process.exit(1);
 });
