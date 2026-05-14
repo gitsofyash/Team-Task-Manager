@@ -49,6 +49,12 @@ A full-stack assignment project where admins create projects, manage teams, assi
    npm run dev
    ```
 
+6. Optional: run a full API smoke test:
+
+   ```bash
+   npm run test:smoke
+   ```
+
 Open `http://localhost:3000`.
 
 ## Railway Deployment
