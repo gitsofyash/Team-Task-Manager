@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Task Manager</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-glow"></div>
+    <main class="shell">
+      <section class="auth-panel" id="authView">
+        <div class="brand">
+          <span class="mark">TT</span>
+          <div>
+            <h1>Team Task Manager</h1>
+            <p>Projects, teams, tasks, and progress in one focused workspace.</p>
+          </div>
+        </div>
+
+        <div class="auth-grid">
+          <div class="auth-copy panel">
+            <p class="eyebrow">Assignment ready</p>
+            <h2>Plan work, assign owners, and see what needs attention.</h2>
+            <div class="feature-grid">
+              <span>Auth</span>
+              <span>RBAC</span>
+              <span>Projects</span>
+              <span>Dashboard</span>
+            </div>
+          </div>
+
+          <form class="panel auth-card" id="signupForm">
+            <h2>Create Account</h2>
+            <input name="name" placeholder="Name" required minlength="2" />
+            <input name="email" type="email" placeholder="Email" required />
+            <input name="password" type="password" placeholder="Password (min 8)" required minlength="8" />
+            <select name="role">
+              <option value="member">Member</option>
+              <option value="admin">Admin</option>
+            </select>
+            <button type="submit">Sign Up</button>
+          </form>
+
+          <form class="panel auth-card" id="loginForm">
+            <h2>Login</h2>
+            <input name="email" type="email" placeholder="Email" required />
+            <input name="password" type="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="app hidden" id="appView">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="roleLabel"></p>
+            <h1 id="welcomeTitle">Dashboard</h1>
+          </div>
+          <button class="ghost" id="logoutButton">Logout</button>
+        </header>
+
+        <section class="stats" id="stats"></section>
+
+        <div class="workspace">
+          <aside class="sidebar">
+            <form class="panel compact" id="projectForm">
+              <div class="section-head">
+                <h2>New Project</h2>
+                <span class="panel-icon">+</span>
+              </div>
+              <input name="name" placeholder="Project name" required minlength="2" />
+              <textarea name="description" placeholder="Description"></textarea>
+              <button type="submit">Create Project</button>
+            </form>
+
+            <div class="panel list-panel">
+              <div class="section-head">
+                <h2>Projects</h2>
+                <span class="muted">Active</span>
+              </div>
+              <div id="projectsList" class="list"></div>
+            </div>
+          </aside>
+
+          <section class="main-panel">
+            <div class="panel">
+              <div class="section-head">
+                <h2 id="projectTitle">Select a project</h2>
+                <span id="projectMeta"></span>
+              </div>
+
+              <form class="inline-form" id="memberForm">
+                <input name="email" type="email" placeholder="Member email" required />
+                <button type="submit">Add Member</button>
+              </form>
+
+              <form class="task-form" id="taskForm">
+                <input name="title" placeholder="Task title" required minlength="2" />
+                <select name="assigneeId" id="assigneeSelect">
+                  <option value="">Unassigned</option>
+                </select>
+                <select name="status">
+                  <option value="todo">To do</option>
+                  <option value="in_progress">In progress</option>
+                  <option value="done">Done</option>
+                </select>
+                <input name="dueDate" type="date" />
+                <textarea name="description" placeholder="Task details"></textarea>
+                <button type="submit">Create Task</button>
+              </form>
+            </div>
+
+            <div class="columns">
+              <div class="panel">
+                <div class="section-head">
+                  <h2>Tasks</h2>
+                  <span class="muted">Track status</span>
+                </div>
+                <div id="tasksList" class="task-list"></div>
+              </div>
+
+              <div class="panel">
+                <div class="section-head">
+                  <h2>Team</h2>
+                  <span class="muted">Members</span>
+                </div>
+                <div id="membersList" class="list"></div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="section-head">
+                <h2>Progress</h2>
+                <span class="muted">Completion</span>
+              </div>
+              <div id="progressList" class="progress-list"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="toast hidden" id="toast"></div>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
